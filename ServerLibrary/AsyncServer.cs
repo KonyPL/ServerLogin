@@ -15,7 +15,6 @@ namespace ServerLibrary
         Regex regexRegister = new Regex(@"register\s[a-zA-Z0-9]+\s[a-zA-Z0-9]+");
         Regex regexDisconnect = new Regex(@"disconnect");
         Regex regexLogout = new Regex(@"logout");
-        bool logged = false;
 
         public delegate void TransmissionDataDelegate(NetworkStream nStream);
         public AsyncServer(IPAddress IP, int port) : base(IP, port)
@@ -34,6 +33,7 @@ namespace ServerLibrary
 
         protected override void BeginDataTransmission(NetworkStream stream)
         {
+            bool logged = false;
             byte[] buffer = new byte[buffer_size];
             
             string hello = "Login status: "+logged+"\n\rTo log in just type your login and password separated by space.\n\rTo register type: \"register user password\"\n\r" +
